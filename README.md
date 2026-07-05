@@ -1,33 +1,13 @@
-# Excalibur Startproject 2026
+# 🎮Herkansing Programmeren 4
 
-- Ga naar [https://github.com/HR-CMGT/prg4-startproject-2026](https://github.com/HR-CMGT/prg4-startproject-2026)
-- Klik op ***USE THIS TEMPLATE > CREATE A NEW REPOSITORY***. Dit kopieert het project naar jouw eigen github.
-- Vanaf je *eigen github* kopieer je de `git url` (onder de "code" button).
-- Open VS Code. Klik op "file" > "clone repository" > plak hier je url.
-- Typ `npm install` en `npm run dev` in de terminal in VS Code. Dit start de development omgeving van Vite.
-- In `game.js` kies je de resolutie van de game.
-- Installeer de [Chrome Excalibur Debugger](https://chromewebstore.google.com/detail/excalibur-dev-tools/dinddaeielhddflijbbcmpefamfffekc)
-- [Bekijk het instructie filmpje!](https://youtu.be/UIVpe4L5_P4)
-- Vervang deze readme file met een beschrijving van jouw game.
+Welkom bij de repository van de herkansing van programmeren 4!
 
-<br><br><br>
+- 👥 **Maker** Bram van Dijke
+- 🎓 **Vak:** Programmeren 4 Leerjaar 1
+- 🌍 **Naam** Wizard in the Desert
 
-### Resoluties
+---
 
-| Widescreen 16/9 | Retro 4/3 |
-|---|---|
-| 640 × 360 | 512 × 384 |
-| 800 × 450 | 640 × 480 |
-| 1280 × 720 | 800 × 600 |
+### 📖 Over de Game
 
-
-<br><br><br>
-
-### AI Instructies
-
-Als je copilot binnen dit project gebruikt zullen de [Excalibur instructions](./.github/copilot-instructions.md) automatisch meegenomen worden. Dit kan je zien door in het AI venster op settings te klikken. Je kan de beschikbare *skills* gebruiken door een `/` te typen. (*bv. voor het bouwen van een platform game of het toevoegen van scenes*).
-
-<img width="550px" src="./public/images/excalibur-ai-skills.png">
-
-⚠️ *AI kan fouten maken! Vergelijk de code altijd met de Excalibur documentatie en lesstof*
-
+"Wizard in the Desert" is een 2D top-down survival shooter, gebouwd met de Excalibur.js engine. In dit spel speel je een tovenaar die zo lang mogelijk moet zien te overleven tegen eindeloze golven van vijanden, waaronder Ogres, Ghosts en Evil Wizards. Het spel bevat oplopende moeilijkheidsgraad, een high-score systeem en health-drops.
