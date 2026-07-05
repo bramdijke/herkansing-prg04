@@ -5,6 +5,7 @@ Welkom bij de repository van de herkansing van programmeren 4!
 - 👥 **Maker** Bram van Dijke
 - 🎓 **Vak:** Programmeren 4 Leerjaar 1
 - 🌍 **Naam** Wizard in the Desert
+- 👾 **Link** https://bramdijke.github.io/herkansing-prg04/
 
 ---
 
