@@ -12,3 +12,11 @@ Welkom bij de repository van de herkansing van programmeren 4!
 ### 📖 Over de Game
 
 "Wizard in the Desert" is een 2D top-down survival shooter, gebouwd met de Excalibur.js engine. In dit spel speel je een tovenaar die zo lang mogelijk moet zien te overleven tegen eindeloze golven van vijanden, waaronder Ogres, Ghosts en Evil Wizards. Het spel bevat oplopende moeilijkheidsgraad, een high-score systeem en health-drops.
+
+---
+
+### 🎮 Controls
+
+- Movement: WASD
+- Dash: Spacebar
+- Shoot: Mouse (aim and click)
