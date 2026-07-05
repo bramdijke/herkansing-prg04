@@ -1,5 +1,5 @@
 import "../css/style.css";
-import { Actor, Engine, Vector, DisplayMode } from "excalibur";
+import { Actor, Engine, Vector, DisplayMode, Color } from "excalibur";
 import { Resources, ResourceLoader } from "./resources";
 
 //Scenes
@@ -16,8 +16,9 @@ export class Game extends Engine {
       displayMode: DisplayMode.FitScreen,
       antialiasing: false,
       snapToPixel: true,
+      backgroundColor: Color.fromHex("#763b36"),
     });
-    
+
     this.addScene("Start", new StartScene());
     this.addScene("World", new WorldScene());
     this.addScene("End", new EndScene());   

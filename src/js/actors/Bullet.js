@@ -35,6 +35,11 @@ export class Bullet extends Actor {
         return; // Negeer de speler, laat de kogel doorvliegen
       }
 
+      if (hitActor && hitActor.name === "enemy") {
+        // Veiligheidscheck: Heeft deze vijand de takeDamage functie?
+          hitActor.takeDamage(1);
+      }
+
       // 3. Als we iets anders raken (Muur of Enemy), despawn de kogel
       this.kill();
     });

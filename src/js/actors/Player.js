@@ -19,6 +19,12 @@ export class Player extends Actor {
     // Is player holding shoot button?
     this.isShooting = false;
 
+    // Health for player
+    this.maxHealth = 3;
+    this.health = 3;
+
+    this.invincibilityTimer = 0;
+
     this.graphics.use(Resources.Player.toSprite());
   }
 
@@ -67,6 +73,13 @@ export class Player extends Actor {
       this.vel = new Vector(0, 0);
     }
 
+    if (this.invincibilityTimer > 0) {
+      this.invincibilityTimer -= delta;
+      this.graphics.opacity = 0.5; // Make player blink when invincible
+    } else {
+      this.graphics.opacity = 1; // Normal visibility
+    }
+
     if (this.shootCooldown > 0) {
       this.shootCooldown -= delta;
     }
@@ -74,7 +87,7 @@ export class Player extends Actor {
     // Check if the button is held down and then shoot
     if (this.isShooting && this.shootCooldown <= 0) {
       this.shootTowardsCursor(engine.input.pointers.primary.lastWorldPos);
-      this.shootCooldown = 250;
+      this.shootCooldown = 300;
     }
   }
 
@@ -83,6 +96,39 @@ export class Player extends Actor {
     const direction = targetPos.sub(this.pos).normalize();
     const bullet = new Bullet(this.pos.x, this.pos.y, direction);
     this.scene.add(bullet);
+
+    // Play shoot sfx at 20% volume
+    if (Resources.FireballSound.isLoaded()) {
+      Resources.FireballSound.play(0.2);
+    }
+  }
+
+  takeDamage(amount) {
+    if (this.invincibilityTimer <= 0) {
+      this.health -= amount;
+      this.invincibilityTimer = 1000;
+      if (Resources.TakeDamageSound.isLoaded()) {
+        Resources.TakeDamageSound.play(0.2);
+      }
+
+      console.log("Player took damage! Health left:", this.health);
+
+      if (this.health <= 0) {
+        this.health = 0;
+        this.scene.engine.goToScene("End");
+      }
+    }
+  }
+
+  healHealth(amount) {
+    this.health += amount;
+
+    // Prevent the player from having more than their maximum hearts
+    if (this.health > this.maxHealth) {
+      this.health = this.maxHealth;
+    }
+
+    console.log("Player healed! Current health:", this.health);
   }
 
   // Clamp the player pos inside this box

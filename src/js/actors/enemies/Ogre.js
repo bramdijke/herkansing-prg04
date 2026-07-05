@@ -3,6 +3,6 @@ import { Resources } from "../../resources.js";
 
 export class Ogre extends Enemy {
   constructor(x, y, player) {
-    super(x, y, player, 50, Resources.Ogre);
+    super(x, y, 24, 24, player, 50, Resources.Ogre, 5, 75);
   }
 }
