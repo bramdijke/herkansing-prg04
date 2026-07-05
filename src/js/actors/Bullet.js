@@ -20,18 +20,17 @@ export class Bullet extends Actor {
 
     this.body.collisionType = CollisionType.Passive;
 
-    // Geef de kogel snelheid in de berekende richting
+    // Give bullet trajectory
     this.vel = this.direction.scale(this.speed);
 
-    // Optioneel: roteer de kogel in de vliegrichting
+    // Rotate the bullet
     this.rotation = this.direction.toAngle();
 
     // Collision logic
     this.on("collisionstart", (evt) => {
-      // 1. Haal de Actor op die bij de collider hoort
       const hitActor = evt.other.owner;
 
-      // 2. Controleer of het geraakte object de speler is
+      // Ignore some actors when colliding
       if (
         hitActor.name === "player" ||
         hitActor.name === "bullet" ||
@@ -41,12 +40,12 @@ export class Bullet extends Actor {
         return;
       }
 
+      // Enemy take damage
       if (hitActor && hitActor.name === "enemy") {
-        // Veiligheidscheck: Heeft deze vijand de takeDamage functie?
         hitActor.takeDamage(1);
       }
 
-      // 3. Als we iets anders raken (Muur of Enemy), despawn de kogel
+      // Remove bullet
       this.kill();
     });
   }
