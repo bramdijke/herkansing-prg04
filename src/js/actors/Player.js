@@ -58,12 +58,12 @@ export class Player extends Actor {
   }
 
   onPreUpdate(engine, delta) {
-    // 1. Handle Dash Cooldowns
+    // Handle Dash Cooldowns
     if (this.dashCooldown > 0) {
       this.dashCooldown -= delta;
     }
 
-    // 2. Handle Movement & Dashing
+    // Handle Movement & Dashing
     if (this.isDashing) {
       this.dashTimer -= delta;
 
@@ -108,7 +108,7 @@ export class Player extends Actor {
       ) {
         this.isDashing = true;
         this.dashTimer = this.dashDuration;
-        this.dashCooldown = 2000; // 2 seconds (2000ms) cooldown
+        this.dashCooldown = 2000; 
 
         // Dash in the current movement direction, or facing direction if standing still
         if (moveDirection.x !== 0 || moveDirection.y !== 0) {
@@ -119,15 +119,15 @@ export class Player extends Actor {
       }
     }
 
-    // 3. Handle Invincibility
+    // Handle Invincibility
     if (this.invincibilityTimer > 0) {
       this.invincibilityTimer -= delta;
-      this.graphics.opacity = 0.5; // Make player blink when invincible
+      this.graphics.opacity = 0.5; 
     } else {
-      this.graphics.opacity = 1; // Normal visibility
+      this.graphics.opacity = 1; 
     }
 
-    // 4. Handle Shooting
+    // Handle Shooting
     if (this.shootCooldown > 0) {
       this.shootCooldown -= delta;
     }
