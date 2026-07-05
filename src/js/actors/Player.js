@@ -13,6 +13,17 @@ export class Player extends Actor {
 
     this.z = 2;
 
+    // Movement speeds
+    this.baseSpeed = 150; // Decreased base speed
+    this.dashSpeed = 400; // Fast speed for dashing
+
+    // Dash state
+    this.isDashing = false;
+    this.dashDuration = 200; // Dash lasts for 200ms
+    this.dashTimer = 0;
+    this.dashCooldown = 0; // Cooldown timer
+    this.dashDirection = new Vector(0, 0);
+
     // Timer to control fire rate
     this.shootCooldown = 0;
 
@@ -47,32 +58,68 @@ export class Player extends Actor {
   }
 
   onPreUpdate(engine, delta) {
-    let moveDirection = new Vector(0, 0);
-
-    // Movement of the player
-    if (engine.input.keyboard.isHeld(Keys.D)) {
-      moveDirection.x = 1;
-      this.scale = new Vector(1, 1);
-    }
-    if (engine.input.keyboard.isHeld(Keys.A)) {
-      moveDirection.x = -1;
-      this.scale = new Vector(-1, 1);
-    }
-    if (engine.input.keyboard.isHeld(Keys.W)) {
-      moveDirection.y = -1;
-    }
-    if (engine.input.keyboard.isHeld(Keys.S)) {
-      moveDirection.y = 1;
+    // 1. Handle Dash Cooldowns
+    if (this.dashCooldown > 0) {
+      this.dashCooldown -= delta;
     }
 
-    // Calculate correct speed when walking diagonally
-    if (moveDirection.x !== 0 || moveDirection.y !== 0) {
-      moveDirection = moveDirection.normalize();
-      this.vel = moveDirection.scale(200);
+    // 2. Handle Movement & Dashing
+    if (this.isDashing) {
+      this.dashTimer -= delta;
+
+      // Override velocity with the dash speed
+      this.vel = this.dashDirection.scale(this.dashSpeed);
+
+      // Stop dashing when the timer runs out
+      if (this.dashTimer <= 0) {
+        this.isDashing = false;
+      }
     } else {
-      this.vel = new Vector(0, 0);
+      let moveDirection = new Vector(0, 0);
+
+      // Normal Movement
+      if (engine.input.keyboard.isHeld(Keys.D)) {
+        moveDirection.x = 1;
+        this.scale = new Vector(1, 1);
+      }
+      if (engine.input.keyboard.isHeld(Keys.A)) {
+        moveDirection.x = -1;
+        this.scale = new Vector(-1, 1);
+      }
+      if (engine.input.keyboard.isHeld(Keys.W)) {
+        moveDirection.y = -1;
+      }
+      if (engine.input.keyboard.isHeld(Keys.S)) {
+        moveDirection.y = 1;
+      }
+
+      // Calculate correct speed when walking diagonally
+      if (moveDirection.x !== 0 || moveDirection.y !== 0) {
+        moveDirection = moveDirection.normalize();
+        this.vel = moveDirection.scale(this.baseSpeed);
+      } else {
+        this.vel = new Vector(0, 0);
+      }
+
+      // Listen for the Dash Button (Spacebar)
+      if (
+        engine.input.keyboard.wasPressed(Keys.Space) &&
+        this.dashCooldown <= 0
+      ) {
+        this.isDashing = true;
+        this.dashTimer = this.dashDuration;
+        this.dashCooldown = 2000; // 2 seconds (2000ms) cooldown
+
+        // Dash in the current movement direction, or facing direction if standing still
+        if (moveDirection.x !== 0 || moveDirection.y !== 0) {
+          this.dashDirection = moveDirection;
+        } else {
+          this.dashDirection = new Vector(this.scale.x, 0);
+        }
+      }
     }
 
+    // 3. Handle Invincibility
     if (this.invincibilityTimer > 0) {
       this.invincibilityTimer -= delta;
       this.graphics.opacity = 0.5; // Make player blink when invincible
@@ -80,6 +127,7 @@ export class Player extends Actor {
       this.graphics.opacity = 1; // Normal visibility
     }
 
+    // 4. Handle Shooting
     if (this.shootCooldown > 0) {
       this.shootCooldown -= delta;
     }
@@ -126,6 +174,10 @@ export class Player extends Actor {
     // Prevent the player from having more than their maximum hearts
     if (this.health > this.maxHealth) {
       this.health = this.maxHealth;
+    }
+
+    if (Resources.PickupSound.isLoaded()) {
+      Resources.PickupSound.play(0.2);
     }
 
     console.log("Player healed! Current health:", this.health);

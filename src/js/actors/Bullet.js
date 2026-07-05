@@ -4,6 +4,7 @@ import { Resources } from "../resources";
 export class Bullet extends Actor {
   constructor(x, y, direction) {
     super({
+      name: "bullet",
       pos: new Vector(x, y),
       width: 16,
       height: 16,
@@ -31,13 +32,17 @@ export class Bullet extends Actor {
       const hitActor = evt.other.owner;
 
       // 2. Controleer of het geraakte object de speler is
-      if (hitActor && hitActor.name === "player") {
-        return; // Negeer de speler, laat de kogel doorvliegen
+      if (
+        hitActor.name === "player" ||
+        hitActor.name === "bullet" ||
+        hitActor.name === "enemyBullet"
+      ) {
+        return;
       }
 
       if (hitActor && hitActor.name === "enemy") {
         // Veiligheidscheck: Heeft deze vijand de takeDamage functie?
-          hitActor.takeDamage(1);
+        hitActor.takeDamage(1);
       }
 
       // 3. Als we iets anders raken (Muur of Enemy), despawn de kogel

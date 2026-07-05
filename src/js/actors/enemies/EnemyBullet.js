@@ -4,6 +4,7 @@ import { Resources } from "../../resources.js";
 export class EnemyBullet extends Actor {
   constructor(x, y, direction) {
     super({
+      name: "enemyBullet",
       pos: new Vector(x, y),
       width: 16,
       height: 16,
@@ -25,7 +26,11 @@ export class EnemyBullet extends Actor {
       const hitActor = evt.other.owner || evt.other;
 
       // Ignore other enemies
-      if (hitActor.name === "enemy") {
+      if (
+        hitActor.name === "enemy" ||
+        hitActor.name === "bullet" ||
+        hitActor.name === "enemyBullet"
+      ) {
         return;
       }
 

@@ -28,6 +28,7 @@ const Resources = {
   FireballSound: new Sound("assets/audio/fireball-sfx.mp3"),
   DeathSound: new Sound("assets/audio/death.mp3"),
   TakeDamageSound: new Sound("assets/audio/takedamage.mp3"),
+  PickupSound: new Sound("assets/audio/pickup.mp3"),
 };
 
 const ResourceLoader = new Loader();
