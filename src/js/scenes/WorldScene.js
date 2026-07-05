@@ -38,16 +38,5 @@ export class WorldScene extends Scene {
 
     // Tell the camera to constantly follow the player actor
     this.camera.strategy.lockToActor(player);
-
-    // const bigOgre = new Ogre(200, 200, player);
-    // this.add(bigOgre);
-
-    // const Wizard = new EvilWizard(200, 300, player);
-    // this.add(Wizard);
-
-    // const GhostS = new Ghost(200, 300, player);
-    // this.add(GhostS);
-
-
   }
 }
