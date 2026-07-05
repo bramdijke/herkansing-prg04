@@ -35,7 +35,8 @@ export class Bullet extends Actor {
       if (
         hitActor.name === "player" ||
         hitActor.name === "bullet" ||
-        hitActor.name === "enemyBullet"
+        hitActor.name === "enemyBullet" ||
+        hitActor.name === "healthItem"
       ) {
         return;
       }

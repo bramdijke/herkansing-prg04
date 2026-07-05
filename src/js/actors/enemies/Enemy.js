@@ -69,8 +69,8 @@ export class Enemy extends Actor {
       // Add score to the total score in the GameState
       GameState.score += this.scoreValue;
 
-      // 20% chance to drop a health item
-      if (Math.random() < 0.5) {
+      // 10% chance to drop a health item
+      if (Math.random() < 0.1) {
         const drop = new HealthItem(this.pos.x, this.pos.y);
         this.scene.add(drop);
       }

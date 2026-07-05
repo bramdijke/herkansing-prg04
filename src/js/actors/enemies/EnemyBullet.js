@@ -29,7 +29,8 @@ export class EnemyBullet extends Actor {
       if (
         hitActor.name === "enemy" ||
         hitActor.name === "bullet" ||
-        hitActor.name === "enemyBullet"
+        hitActor.name === "enemyBullet" ||
+        hitActor.name === "healthItem"
       ) {
         return;
       }

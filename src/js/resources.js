@@ -23,6 +23,7 @@ const Resources = {
   // Icons
   Heart: new ImageSource("assets/icons/heart-icon.png"),
   EmptyHeart: new ImageSource("assets/icons/empty-heart-icon.png"),
+  GameLogo: new ImageSource("assets/images/gamelogo.png"),
 
   // Sounds
   FireballSound: new Sound("assets/audio/fireball-sfx.mp3"),

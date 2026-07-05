@@ -3,9 +3,17 @@ import { Resources } from "../resources.js";
 
 export class StartScene extends Scene {
   onInitialize(engine) {
+    const logo = new Actor({
+      pos: new Vector(engine.halfDrawWidth, engine.halfDrawHeight - 50),
+    });
+
+    logo.graphics.use(Resources.GameLogo.toSprite());
+
+    this.add(logo);
+
     const startLabel = new Label({
       text: "Press SPACE to Start",
-      pos: new Vector(engine.halfDrawWidth, engine.halfDrawHeight + 80),
+      pos: new Vector(engine.halfDrawWidth, engine.halfDrawHeight + 120),
       font: new Font({
         family: "PixelFont",
         size: 32,
