@@ -1,32 +1,33 @@
-import '../css/style.css'
-import { Actor, Engine, Vector, DisplayMode } from "excalibur"
-import { Resources, ResourceLoader } from './resources.js'
+import "../css/style.css";
+import { Actor, Engine, Vector, DisplayMode } from "excalibur";
+import { Resources, ResourceLoader } from "./resources";
+
+//Scenes
+import { StartScene } from "./scenes/StartScene";
+import { WorldScene } from "./scenes/WorldScene";
+import { EndScene } from "./scenes/EndScene";
 
 export class Game extends Engine {
+  constructor() {
+    super({
+      width: 640,
+      height: 480,
+      maxFps: 60,
+      displayMode: DisplayMode.FitScreen,
+      antialiasing: false,
+      snapToPixel: true,
+    });
+    
+    this.addScene("Start", new StartScene());
+    this.addScene("World", new WorldScene());
+    this.addScene("End", new EndScene());   
 
-    constructor() {
-        super({ 
-            width: 1280,
-            height: 720,
-            maxFps: 60,
-            displayMode: DisplayMode.FitScreen
-         })
-        this.start(ResourceLoader).then(() => this.startGame())
-    }
+    this.start(ResourceLoader).then(() => this.startGame());
+  }
 
-    startGame() {
-        console.log("start de game!")
-        const fish = new Actor()
-        fish.graphics.use(Resources.Fish.toSprite())
-        fish.pos = new Vector(500, 300)
-        fish.vel = new Vector(-10,0)
-        fish.events.on("exitviewport", (e) => this.fishLeft(e))
-        this.add(fish)
-    }
-
-    fishLeft(e) {
-        e.target.pos = new Vector(1350, 300)
-    }
+  startGame() {
+      this.goToScene("Start");
+  }
 }
 
-new Game()
+new Game();
