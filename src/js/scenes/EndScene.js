@@ -51,7 +51,6 @@ export class EndScene extends Scene {
       }),
     });
 
-    // 2. Create the instructional text for the player
     const retryText = new Label({
       text: "Press SPACE to retry",
       pos: new Vector(engine.halfDrawWidth, engine.halfDrawHeight + 130),
@@ -67,7 +66,7 @@ export class EndScene extends Scene {
     this.add(gameOverText);
     this.add(this.finalScoreText);
     this.add(this.highScoreText);
-    this.add(retryText); // Don't forget to add the text to the scene!
+    this.add(retryText); 
   }
 
   onActivate(engine) {
@@ -76,11 +75,10 @@ export class EndScene extends Scene {
     this.highScoreText.text = `High Score: ${GameState.highScore}`;
   }
 
-  // 3. Check for the Spacebar press every frame
   onPreUpdate(engine, delta) {
-    // using "wasPressed" ensures it only triggers exactly once per tap
+    // Check if space is pressed
     if (engine.input.keyboard.wasPressed(Keys.Space)) {
-      // Instantly refresh the page to completely reset the game!
+      // Refresh page to reset game
       window.location.reload();
     }
   }

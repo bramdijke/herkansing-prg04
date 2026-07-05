@@ -24,17 +24,17 @@ export class EnemyBullet extends Actor {
     this.on("collisionstart", (evt) => {
       const hitActor = evt.other.owner || evt.other;
 
-      // Negeer andere vijanden
+      // Ignore other enemies
       if (hitActor.name === "enemy") {
         return;
       }
 
-      // Als de kogel de speler raakt, haal er health af
+      // If it hits the player, he takes damage
       if (hitActor.name === "player") {
         hitActor.takeDamage(1);
       }
 
-      // Despawn de kogel bij het raken van de speler of een muur
+      // Remove the bullet
       this.kill();
     });
   }

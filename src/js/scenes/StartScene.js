@@ -3,7 +3,6 @@ import { Resources } from "../resources.js";
 
 export class StartScene extends Scene {
   onInitialize(engine) {
-    // Create the start label
     const startLabel = new Label({
       text: "Press SPACE to Start",
       pos: new Vector(engine.halfDrawWidth, engine.halfDrawHeight + 80),

@@ -3,7 +3,7 @@ import { GameState } from "../gamestate";
 export class ScoreUI extends ScreenElement {
   constructor() {
     super({
-      x: 640 - 20, // Move it to the right side of the screen (assuming 800 width)
+      x: 640 - 20, 
       y: 20,
       z: 999,
     });
@@ -18,9 +18,9 @@ export class ScoreUI extends ScreenElement {
         family: "PixelFont",
         size: 24,
         unit: FontUnit.Px,
-        color: Color.White, // Change this to Black if your background is light!
+        color: Color.White, 
         bold: true,
-        textAlign: "right", // Aligns text to the right so it expands backwards
+        textAlign: "right", 
       }),
     });
 

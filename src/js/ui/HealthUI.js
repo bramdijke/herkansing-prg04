@@ -14,7 +14,6 @@ export class HealthUI extends ScreenElement {
   }
 
   onInitialize(engine) {
-    // 1. Create the scaled sprites ONCE so Excalibur doesn't lag or reset them
     this.fullHeartSprite = Resources.Heart.toSprite();
     this.fullHeartSprite.scale = new Vector(2, 2);
 
@@ -23,7 +22,6 @@ export class HealthUI extends ScreenElement {
 
     for (let i = 0; i < this.player.maxHealth; i++) {
       const heart = new ScreenElement({
-        // Increased spacing from 32 to 60 since the hearts are 3x bigger now!
         x: i * 32,
         y: 0,
       });
